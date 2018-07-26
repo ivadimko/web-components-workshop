@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang=en>
+<title>Web Components by @shvaikalesh</title>
+<meta charset="utf-8">
+<meta name=viewport content="width=device-width">
+<base target=_blank>
+<link rel=stylesheet href="shower/themes/ribbon/styles/styles.css">
+
+<body class="shower list">
+<header class=caption>
+  <h1>Web Components</h1>
+  <p>
+    <a href="https://github.com/shvaikalesh" rel=author>@shvaikalesh</a>,
+    Hell Yeah LLC
+  </p>
+</header>
+
+<section class="slide clear">
+  <h2 class=shout>Web<br>Components</h2>
+  <p class="note place bottom">
+    <a href="https://github.com/shvaikalesh" rel=author>@shvaikalesh</a>
+  </p>
+</section>
+
+<section class=slide>
+  <h2>Custom Elements</h2>
+  <ol>
+    <li>Prior art, making of, related technologies
+    <li class=next>Current application, component definition, lifecycle hooks
+    <li class=next>Autonomous custom elements, built-in extension debate
+    <li class=next>Attributes reflection, nested custom elements, custom events
+    <li class=next><b>Demo:</b> <code>&lt;relative-time&gt;</code> component (with light tree)
+    <li class=next>Interop with super legacy code, cross-document components
+    <li class=next>Popular front-end solutions & web components interop
+  </ol>
+</section>
+
+<section class=slide>
+  <h2>Shadow DOM</h2>
+  <ol>
+    <li>Shadow roots and their modes, style & DOM encapsulation
+    <li class=next>Slots and slotables, signaling slot change
+    <li class=next>Events & user interaction + shadow boundaries
+    <li class=next><b>Demo:</b> extend <code>&lt;video&gt;</code> to pause when out of view
+    <li class=next><b>Demo:</b> <code>&lt;native-select&gt;</code> (with user-supplied template)
+    <li class=next>Overview of libraries for web components, popular components
+    <li class=next>What's next for web components, people to follow
+  </ol>
+</section>
+
+<section class=slide>
+  <h2>Takeaways</h2>
+  <ul>
+    <li>Custom Elements & Shadow DOM APIs
+    <li class=next>State of browser support & limitations of shims
+    <li class=next>State of support by popular front-end solutions
+    <li class=next>Design idiomatic components, extend built-ins
+    <li class=next>
+      Brief overview of
+      <a href="https://github.com/Wildhoney/ReactShadow">ReactShadow</a>,
+      <a href="https://www.polymer-project.org">Polymer</a>, and
+      <a href="https://skatejs.netlify.com">Skate</a>
+    <li class=next>Modern DOM & browser APIs
+  </ul>
+</section>
+
+<section class=slide>
+  <h2>To ponder on</h2>
+  <ul>
+    <li>Were the goals archived?
+    <li class=next>Is the level of abstraction right?
+    <li class=next>Are common use cases covered?
+  </ul>
+</section>
+
+<section class=slide>
+  <h2>Vue?</h2>
+
+  <img class="place center" src="images/vue.svg" alt style="
+    margin-top: 50px;
+    width: 50%;
+    height: 50%;
+  ">
+</section>
+
+<section class=slide>
+  <h2>Prior art</h2>
+
+  <p>
+    <code>&lt;iframe&gt;</code> for embeddable third-party widgets
+  </p>
+
+  <ul>
+    <li>Pro: secure origin policy for DOM access
+    <li class=next>Pro: <code>sandbox</code> attribute, <code>postMessage</code> communication
+    <li class=next>Pro: separate clean JavaScript realm
+    <li class=next>Con: does not resize to fit content
+    <li class=next>Con: does not inherit parent's styles
+    <li class=next>Con: hyperlinks navigate iframe, not parent
+  </ul>
+</section>
+
+<section class=slide>
+  <h2>Prior art</h2>
+
+  <p>
+    <code>&lt;iframe seamless&gt;</code> for embeddable third-party widgets
+  </p>
+
+  <p>
+    <a href="http://benv.ca/seamless-talk">Talk (slides)</a> about rewrite of
+    <a href="https://disqus.com">Disqus</a> comment widget and making it work cross-browser
+    by <a href="https://twitter.com/bentlegen">Ben Vinegar</a>
+  </p>
+
+  <p class=note>
+    Was defined in <a href="https://html.spec.whatwg.org">WHATWG HTML</a> specification<br>
+    Was partially implemented behind the flag in <a href="https://caniuse.com/#feat=iframe-seamless">Chrome 20 &ndash; 26</a>
+  </p>
+</section>
+
+<section class=slide>
+  <h2>Prior art</h2>
+
+  <p>
+    <code>&lt;style scoped&gt;</code> for style isolation
+  </p>
+
+  <ul>
+    <li>Pro: prevents outward style leakage
+    <li class=next>Con: does not prevent inward style leakage
+    <li class=next>Con: does not provide DOM encapsulation
+  </ul>
+
+  <p class=note>
+    Was defined in <a href="https://html.spec.whatwg.org">WHATWG HTML</a> specification<br>
+    Was shipped in <a href="https://caniuse.com/#feat=style-scoped">Firefox 21 &ndash; 54</a>, now removed
+  </p>
+</section>
+
+<section class=slide>
+  <h2>Brief history of Web Components</h2>
+  <ol>
+    <li>Effort to rewrite <a href="https://mail.google.com">Gmail</a> using modern technologies
+    <li class=next>The effort had huge impact on real-world latency
+    <li class=next>A team to upgrade web platform was assembled
+    <li class=next>The team focused on subclassing <code>HTMLElement</code>
+    <li class=next>JavaScript & DOM lacked features
+  </ol>
+
+  <figure class="place right" style="margin-right: 50px">
+    <img src="images/alex-russell.jpg" alt style="width: 200px">
+    <figcaption style="text-align: center">
+      <a href="https://twitter.com/slightlylate">Alex Russell</a>
+    </figcaption>
+  </figure>
+
+  <p class=note>
+    Web Components talks by Alex: <a href="https://vimeo.com/33430613">2011</a>, <a href="https://www.youtube.com/watch?v=y-8Lmg5Gobw">2017</a>
+  </p>
+</section>
+
+<section class="slide clear">
+  <img class=cover src="images/stuff-we-advanced.png" alt>
+</section>
+
+<section class=slide>
+  <h2>Use cases today</h2>
+
+  <ol>
+    <li><a href="https://www.polymer-project.org">Polymer</a> applications
+    <li class=next>Style isolation with Shadow DOM
+    <li class=next>Reusable cross-framework components
+  </ol>
+</section>
+
+<section class=slide>
+  <h2>Valid custom element name</h2>
+  <ul>
+    <li>Not blacklisted
+    <li>Starts with <code>[a-z]</code>
+    <li>Does not contain <code>[A-Z]</code>
+    <li>Contains a hyphen: <code>&lt;h-&gt;</code> is valid
+    <li>Unicode-friendly: <code>&lt;emoji-😃&gt;</code> is valid
+  </ul>
+
+  <p class=note>
+    <a href="https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name">WHATWG HTML spec</a>
+  </p>
+</section>
+
+<section class="slide clear">
+  <h2 class=shout>Demo</h2>
+
+  <p class="note place bottom">
+    <a href="https://www.youtube.com/watch?v=T3xMyZH93i8">Invisible Code</a> by
+    <a href="https://twitter.com/aemkei">Martin Kleppe</a>
+  </p>
+</section>
+
+<section class=slide>
+  <h2>Valid custom element name</h2>
+
+  <p>
+    <code>document.createElement</code> has stricter tag grammar than <code>customElements.define</code>
+  </p>
+
+  <p>
+    Control characters can be used to enforce tag uniqueness without compomising debugging experience
+  </p>
+</section>
+
+<section class=slide>
+  <h2>Custom Elements creation</h2>
+
+  <ul>
+    <li>HTML parser
+    <li><code>document.createElement</code>
+    <li><code>new</code> with custom element constructor
+  </ul>
+</section>
+
+<section class=slide>
+  <h2>Custom Elements upgrades</h2>
+
+  <ul>
+    <li>Automatically when connected
+    <li>Manually with <code>customElements.define</code>
+    <li>Sync or async
+  </ul>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Content attribute reflection</h2>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Built-in extension</h2>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Demo</h2>
+</section>
+
+<section class=slide>
+  <h2>Custom element adoption</h2>
+
+  <pre>
+    <code>let iframe = document.createElement("iframe")</code>
+    <code class=next>iframe.<mark>sandbox</mark> = "allow-same-origin"</code>
+    <code class=next>iframe.<mark>srcdoc</mark> = "..."</code>
+    <code class=next>let commentWidget = document.createElement("comment-widget")</code>
+    <code class=next>iframe.contentDocument.body.append(commentWidget)</code>
+  </pre>
+</section>
+
+<section class=slide>
+  <h2>Custom element adoption</h2>
+
+  <ol>
+    <li>Prefer <code>this.ownerDocument</code> to <code>document</code>
+    <li class=next>Subscribe and unsubscribe to document in separate methods
+    <li class=next>Call those methods during <code>adoptedCallback</code>
+  </ol>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Unscopables</h2>
+</section>
+
+<section class=slide>
+  <h2 class=shout>
+    <a href="https://custom-elements-everywhere.com">
+      Custom Elements<br>Everywhere
+    </a>
+  </h2>
+
+  <p class="note place bottom">
+    <a href="https://www.youtube.com/watch?v=sK1ODp0nDbM">Talk</a> by
+    <a href="https://twitter.com/rob_dodson">Rob Dodson</a>
+  </p>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Shadow root modes</h2>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Slots & scopables</h2>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Focus & shadow DOM</h2>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Demo</h2>
+</section>
+
+<section class=slide>
+  <h2>ReactShadow</h2>
+
+  <pre>
+    <code>import ShadowRoot from "react-shadow"</code>
+    <code>const<mark class=important>css</mark>= ".message { color: red }"</code>
+    <code class=next>export default ({message}) => <mark>&lt;ShadowRoot&gt;</mark></code>
+    <code class=next>  &lt;style&gt;<mark class=important>{css}</mark>&lt;/style&gt;</code>
+    <code class=next>  &lt;p class="message"&gt;{message}&lt;/p&gt;</code>
+    <code class=next><mark>&lt;/ShadowRoot&gt;</mark></code>
+  </pre>
+</section>
+
+<section class=slide>
+  <h2>ReactShadow</h2>
+
+  <ul>
+    <li>Caching of resources should be handled on lower level
+    <li class=next><code>include</code> is poor design
+    <li class=next>Custom FOUC prevention is a drag
+    <li class=next>Has almost 600 ⭐, but there is no reason for it to exist
+  </ul>
+
+  <p class=note>
+    <code>&lt;shadow-root&gt;</code> custom element?
+  </p>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Polymer</h2>
+</section>
+
+<section class=slide>
+  <h2 class=shout>Skate</h2>
+</section>
+
+<section class=slide>
+  <h2>What's next</h2>
+
+  <ul>
+    <li>React 17
+    <li>Firefox implementation
+    <li>Large-scale users
+  </ul>
+</section>
+
+<div class=progress></div>
+
+<script src="shower/shower.min.js" defer></script>
+<style>
+  .shower {
+    --slide-ratio: calc(16 / 9);
+  }
+
+  .slide code {
+    margin: 0;
+  }
+
+  .slide code mark.important {
+    margin: 0 0.3em;
+  }
+</style>

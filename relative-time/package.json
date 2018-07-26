@@ -1,0 +1,21 @@
+{
+  "name": "relative-time",
+  "version": "0.1.0",
+  "description": "<relative-time> web component",
+  "keywords": [
+    "humanize",
+    "human",
+    "relative",
+    "date",
+    "time",
+    "web component"
+  ],
+  "bugs": "https://github.com/shvaikalesh/workshop-web-components/issues",
+  "license": "MIT",
+  "author": "Aleksey Shvayka <shvaikalesh@gmail.com>",
+  "repository": "shvaikalesh/workshop-web-components",
+  "dependencies": {
+    "lodash-es": "^4.17.10",
+    "moment": "^2.22.2"
+  }
+}
